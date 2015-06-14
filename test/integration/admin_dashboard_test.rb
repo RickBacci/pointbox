@@ -39,11 +39,12 @@ class AdminDashboardTest < ActionDispatch::IntegrationTest
   test "admin can add a reward" do
     admin = User.create(name: "admin", password: 'adminpass', role: 1)
     ApplicationController.any_instance.stubs(:current_user).returns(admin)
-     byebug
+
     visit admin_dashboard_index_path
+
     click_button "Add new reward"
 
-    fill_in "Name", with: "pizza"
+    fill_in "Name", with: "Pizza"
     fill_in "Description", with: "Yummy!"
     
     click_button "Create reward"

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   
   resources :users, only: [:new, :create, :show]
 
+  resources :rewards, only: [:new, :create, :show]
+
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'   
   delete '/logout', to: 'sessions#destroy'
@@ -11,7 +13,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :dashboard, only: [:index]    
-    resources :rewards, only: [:new, :create, :show]
   end
 
   # Example of regular route:

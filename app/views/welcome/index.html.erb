@@ -2,8 +2,7 @@
 <h1>Welcome to Pointbox</h2>
 
     <%= button_to "Login", login_path, method: :get %>
- <p>
-   The time is now: <%= Time.now %>
- </p>
 
-
+    <% @rewards.each do |reward| %>
+      <%= reward.name %><br />
+    <% end %>

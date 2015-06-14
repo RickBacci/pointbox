@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
   def current_admin?
     current_user && current_user.admin?
   end
+
+  def authenticate
+    redirect_to(root_path) if current_user.nil?
+  end
+
 end

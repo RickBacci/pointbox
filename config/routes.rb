@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:new, :create, :show]
 
-  resources :rewards, only: [:new, :create, :show]
+  resources :rewards, only: [:new, :create, :show, :destroy]
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'   

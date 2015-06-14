@@ -24,18 +24,6 @@ class AdminDashboardTest < ActionDispatch::IntegrationTest
                              "404 page not shown"
   end
 
-
-
-# as an admin
-# when i visit the admin panel
-# and click on 'add reward'
-# and enter the reward name
-# and enter the reward description
-# and click 'enter'
-# it should add the reward to the database
-
-
-
   test "admin can add a reward" do
     admin = User.create(name: "admin", password: 'adminpass', role: 1)
     ApplicationController.any_instance.stubs(:current_user).returns(admin)
@@ -51,5 +39,20 @@ class AdminDashboardTest < ActionDispatch::IntegrationTest
 
     assert page.has_content?("Pizza"), "reward name empty"
     assert page.has_content?("Yummy!"), "reward description empty"
+  end
+
+  test "admin can delete a reward" do
+    admin = User.create(name: 'admin', password: 'adminpass', role: 1)
+    ApplicationController.any_instance.stubs(:current_user).returns(admin)
+
+    reward = Reward.create(name: 'none', description: 'about to die')
+
+    visit root_path
+    assert page.has_content?('none'), 'missing reward name'
+
+    visit reward_path(reward)
+    click_button "Delete Reward"
+
+    refute page.has_content?('none'), 'reward not deleted'
   end
 end

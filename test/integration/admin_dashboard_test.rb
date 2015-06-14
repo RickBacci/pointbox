@@ -55,4 +55,25 @@ class AdminDashboardTest < ActionDispatch::IntegrationTest
 
     refute page.has_content?('none'), 'reward not deleted'
   end
+
+  test "admin can edit a reward" do
+    
+    admin = User.create(name: 'admin', password: 'adminpass', role: 1)
+    ApplicationController.any_instance.stubs(:current_user).returns(admin)
+
+    reward = Reward.create(name: 'none', description: 'about to die')
+    
+    visit edit_reward_path(reward)
+    click_button "Edit reward"
+
+    fill_in "Name", with: "some"
+    fill_in "Description", with: "thing new"
+
+    click_button "Submit"
+
+    assert page.has_content?("some"), 'Failure message.'
+    assert page.has_content?("thing new"), 'Failure message.'
+    
+    refute page.has_content?("none"), 'Failure message.'
+  end
 end

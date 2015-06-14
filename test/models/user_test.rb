@@ -9,7 +9,6 @@ class UserTest < ActiveSupport::TestCase
     { name: nil, password: nil }
   end
 
-  
 
   test "create a valid user" do
     user = User.new(valid_attributes)

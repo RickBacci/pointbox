@@ -4,9 +4,9 @@ class UserNotLoggedInTest < ActionDispatch::IntegrationTest
   
   test "a user that is not logged in can see rewards" do
    
-    Reward.create(name: 'reward1')
-    Reward.create(name: 'reward2')
-    Reward.create(name: 'reward3')
+    Reward.create(name: 'reward1', description: 'asdf')
+    Reward.create(name: 'reward2', description: 'asdf')
+    Reward.create(name: 'reward3', description: 'asdf')
 
     visit root_path
 

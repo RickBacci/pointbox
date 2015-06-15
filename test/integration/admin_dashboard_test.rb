@@ -83,4 +83,27 @@ class AdminDashboardTest < ActionDispatch::IntegrationTest
     assert page.has_content?("some"), 'Failure message.'
     refute page.has_content?("none"), 'Failure message.'
   end
+
+
+#  as an admin
+# when i visit the list of users
+# and click on a user
+# and select a point value
+# and click 'assign points'
+# it should assign those points to the user
+
+  test "something interesting" do
+    admin = User.create(name: 'admin', password: 'adminpass', role: 1)
+    ApplicationController.any_instance.stubs(:current_user).returns(admin)
+    
+    visit users_path
+    click_link "admin"
+    
+    assert_equal 0, admin.points
+    check "100"
+
+    click_button "Assign points"
+
+    assert_equal 100, admin.points
+  end
 end

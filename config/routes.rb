@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:index, :new, :create, :show]
 
   resources :rewards, except: [:index]
 

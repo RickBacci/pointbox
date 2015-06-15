@@ -1,0 +1,7 @@
+<h1>User list</h1>
+
+<% @users.each do |user| %>
+  <%= link_to "#{user.name}", user_path(user) %> <%= user.points %><br />
+<% end %>
+
+

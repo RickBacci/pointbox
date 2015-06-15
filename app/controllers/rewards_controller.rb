@@ -1,5 +1,7 @@
 class RewardsController < ApplicationController
 
+  before_action :require_admin, except: [:show]
+
   def new
     @reward = Reward.new
   end

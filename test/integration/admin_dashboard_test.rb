@@ -40,6 +40,16 @@ class AdminDashboardTest < ActionDispatch::IntegrationTest
     assert page.has_content?("Pizza"), "reward name empty"
     assert page.has_content?("Yummy!"), "reward description empty"
   end
+ 
+  test "non-admin cannot add rewards" do 
+    
+    user = User.create(name: "user", password: 'userpass', role: 0)
+    ApplicationController.any_instance.stubs(:current_user).returns(user)
+
+    visit new_reward_path
+
+    assert page.has_content?("The page you were looking for doesn't exist") 
+  end
 
   test "admin can delete a reward" do
     admin = User.create(name: 'admin', password: 'adminpass', role: 1)

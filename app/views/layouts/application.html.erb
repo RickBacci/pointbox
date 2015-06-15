@@ -8,18 +8,17 @@
   </head>
 
   <body>
-
-  <% unless login_path || current_user %>
-    <%= button_to "Login", login_path, method: :get %>
-  <% end %>
-
+<p>
   <% if current_user %>
     Welcome, <%= current_user.name %>
     <%= button_to "Logout", logout_path, method: :delete %>
-  <% else %>
-    <%= button_to "Register", new_user_path, method: :get %>
+  <% else %>  
+    <% unless login_path? || new_user_path? %> 
+      <%= button_to "Register", new_user_path, method: :get %>
+      <%= button_to "Login", login_path, method: :get %>
+    <% end %> 
   <% end %>
-
+</p>
   <%= yield %>
 
   </body>

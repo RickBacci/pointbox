@@ -4,7 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user
-
+  helper_method :login_path?
+  helper_method :new_user_path?
+ 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
@@ -19,5 +21,13 @@ class ApplicationController < ActionController::Base
 
   def require_admin
     render file: "/public/404.html" unless current_admin?       
+  end
+
+  def login_path?
+    env['ORIGINAL_FULLPATH'] == login_path
+  end
+
+  def new_user_path?
+    env['ORIGINAL_FULLPATH'] == new_user_path
   end
 end

@@ -18,6 +18,19 @@ class RewardsController < ApplicationController
     @reward = Reward.find(params[:id])    
   end
 
+  def edit
+    @reward = Reward.find(params[:id])
+  end
+
+
+  def update
+   reward = Reward.find(params[:id])
+   reward.update(reward_params)
+
+   redirect_to root_path
+  end
+
+ 
   def destroy
     @reward = Reward.find(params[:id])
     @reward.destroy

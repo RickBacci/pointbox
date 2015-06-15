@@ -34,8 +34,8 @@ class AdminDashboardTest < ActionDispatch::IntegrationTest
 
     fill_in "Name", with: "Pizza"
     fill_in "Description", with: "Yummy!"
-    
-    click_button "Create reward"
+
+    click_button "Create Reward"
 
     assert page.has_content?("Pizza"), "reward name empty"
     assert page.has_content?("Yummy!"), "reward description empty"
@@ -64,16 +64,13 @@ class AdminDashboardTest < ActionDispatch::IntegrationTest
     reward = Reward.create(name: 'none', description: 'about to die')
     
     visit edit_reward_path(reward)
-    click_button "Edit reward"
 
     fill_in "Name", with: "some"
     fill_in "Description", with: "thing new"
 
-    click_button "Submit"
+    click_button "Update Reward"
 
     assert page.has_content?("some"), 'Failure message.'
-    assert page.has_content?("thing new"), 'Failure message.'
-    
     refute page.has_content?("none"), 'Failure message.'
   end
 end

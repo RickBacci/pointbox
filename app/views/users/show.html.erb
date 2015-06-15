@@ -1,0 +1,9 @@
+<h1>User Dashboard</h1>
+
+<% if current_user.admin? %>
+  <%= form_for([@user, @points]) do |f| %>
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+    <%= f.submit %>
+  <% end %>
+<% end %>

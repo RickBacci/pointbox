@@ -8,10 +8,17 @@
   </head>
 
   <body>
+  
 <p>
   <% if current_user %>
-    Welcome, <%= current_user.name %>
-    <%= button_to "Logout", logout_path, method: :delete %>
+    <% if current_user.admin? %>
+      <%= link_to "Admin Dashboard", admin_dashboard_index_path %>
+    <% end %>
+
+    <%= button_to "Logout", logout_path, method: :delete %><br />
+    <% if welcome? %>
+       Welcome, <%= current_user.name %>
+    <% end %>
   <% else %>  
     <% unless login_path? || new_user_path? %> 
       <%= button_to "Register", new_user_path, method: :get %>

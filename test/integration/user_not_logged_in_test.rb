@@ -10,7 +10,7 @@ class UserNotLoggedInTest < ActionDispatch::IntegrationTest
 
     visit root_path
 
-    assert page.has_content?('Welcome to Pointbox'), 'title not found'
+    assert page.has_content?('Pointbox'), 'title not found'
     assert page.has_content?('reward1'), 'reward1 not found'
     assert page.has_content?('reward2'), 'reward2 not found'
     assert page.has_content?('reward3'), 'reward3 not found'

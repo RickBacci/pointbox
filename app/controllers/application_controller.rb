@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :login_path?
   helper_method :new_user_path?
- 
+  helper_method :welcome? 
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
@@ -29,5 +30,9 @@ class ApplicationController < ActionController::Base
 
   def new_user_path?
     env['ORIGINAL_FULLPATH'] == new_user_path
+  end
+
+  def welcome?
+    env['ORIGINAL_FULLPATH'] == root_path
   end
 end
